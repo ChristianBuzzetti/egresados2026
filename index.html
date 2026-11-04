@@ -3,180 +3,203 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Egresados 2026 · La fiesta</title>
+<title>Egresados 2026 · 12/12</title>
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="Cuenta regresiva para la fiesta de egresados 2026. Sumá tus temas a la playlist.">
-<meta name="theme-color" content="#14122a">
+<meta name="description" content="Cuenta regresiva para la fiesta de egresados 2026. Armemos la playlist entre todos: cargá tus temas.">
+<meta name="theme-color" content="#050505">
+<meta name="color-scheme" content="dark">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Egresados 2026 🎉 La fiesta">
-<meta property="og:description" content="Cuenta regresiva para la fiesta. ¿Qué tiene que sonar? Cargá tus temas para la playlist.">
+<meta property="og:title" content="Egresados 2026 · 12/12">
+<meta property="og:description" content="Armemos la playlist de la fiesta entre todos ✨ Cargá tus temas y mirá cuánto falta para el 12/12.">
 <meta property="og:image" content="https://christianbuzzetti.github.io/egresados2026/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="https://christianbuzzetti.github.io/egresados2026/">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+<meta name="twitter:title" content="Egresados 2026 · 12/12">
+<meta name="twitter:description" content="Armemos la playlist de la fiesta entre todos ✨ Cargá tus temas.">
+<meta name="twitter:image" content="https://christianbuzzetti.github.io/egresados2026/og.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪩</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-<style>
-:root{--navy:#14122a;--navy2:#1b1838;--lime:#c6f432;--pink:#ff4fa3;--violet:#8b6cff;--muted:#cfcde3}
-*{margin:0;padding:0;box-sizing:border-box}
-html{background:#0e0c1f}
-body{font-family:Inter,system-ui,sans-serif;color:#fff;min-height:100vh;overflow-x:hidden;position:relative;
- background:
-  radial-gradient(circle at 100% 12%, rgba(255,79,163,.35), transparent 420px),
-  radial-gradient(circle at 0% 45%, rgba(139,108,255,.25), transparent 480px),
-  radial-gradient(circle at 20% 100%, rgba(198,244,50,.14), transparent 460px),
-  linear-gradient(170deg,var(--navy2) 0%,var(--navy) 55%,#0e0c1f 100%);background-attachment:scroll}
-.bg{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
-#deco{position:absolute;left:0;top:0;width:100%;height:100%}
-.vinyl{position:absolute;right:-150px;top:70px;width:340px;height:340px;z-index:0;pointer-events:none;
- filter:drop-shadow(0 0 30px rgba(255,79,163,.45));animation:spin 14s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-@media (prefers-reduced-motion:reduce){.vinyl,.eq span{animation:none!important}}
-main{position:relative;z-index:1;max-width:560px;margin:0 auto;padding:28px 22px 40px}
-.chip{display:inline-flex;gap:10px;align-items:center;font-weight:800;font-size:12px;letter-spacing:2.5px;color:var(--navy);background:var(--lime);padding:9px 16px;border-radius:999px;box-shadow:0 0 24px rgba(198,244,50,.45)}
-.chip i{width:7px;height:7px;border-radius:50%;background:var(--pink);display:block}
-.big{font-family:Anton,Impact,sans-serif;line-height:.9;font-weight:400}
-h1{margin-top:22px}
-h1 .e{display:block;font-size:clamp(64px,21vw,132px);text-shadow:0 5px 0 rgba(255,79,163,.85),0 0 40px rgba(255,255,255,.12)}
-h1 .y{display:block;font-size:clamp(90px,30vw,176px);color:var(--lime);margin-top:4px;text-shadow:0 0 18px rgba(198,244,50,.55),0 0 60px rgba(198,244,50,.35)}
-.eq{display:flex;align-items:center;gap:4px;height:46px;margin:22px 0 6px;-webkit-mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-.eq span{flex:1;border-radius:99px;background:linear-gradient(180deg,var(--lime),var(--pink));box-shadow:0 0 10px rgba(255,79,163,.5);animation:bounce 1.2s ease-in-out infinite alternate;transform-origin:center}
-@keyframes bounce{from{transform:scaleY(.55)}to{transform:scaleY(1)}}
-section{margin-top:30px}
-.label{font-weight:800;font-size:12px;letter-spacing:3px;color:#ff8fc6;text-transform:uppercase}
-.cardwrap{padding:3px;border-radius:26px;background:linear-gradient(120deg,var(--lime),var(--pink) 55%,var(--violet));box-shadow:0 0 40px rgba(255,79,163,.3),0 18px 50px rgba(0,0,0,.45);margin-top:12px}
-.card{background:var(--navy);border-radius:23px;padding:22px 18px;text-align:center;
- background-image:radial-gradient(circle at 0% 0%,rgba(198,244,50,.14),transparent 55%),radial-gradient(circle at 100% 100%,rgba(255,79,163,.2),transparent 55%)}
-.count{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.count div{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:12px 2px 10px}
-.count b{display:block;font-family:Anton,Impact,sans-serif;font-weight:400;font-size:clamp(34px,11vw,54px);line-height:1;color:#fff;font-variant-numeric:tabular-nums}
-.count div:first-child b{color:var(--lime);text-shadow:0 0 16px rgba(198,244,50,.5)}
-.count small{display:block;margin-top:6px;font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase}
-.when{margin-top:14px;font-size:15px;color:var(--muted)}
-.when b{color:#fff}
-.today{display:none;font-family:Anton,Impact,sans-serif;font-size:56px;line-height:1.05;color:var(--lime);text-shadow:0 0 24px rgba(198,244,50,.55);padding:10px 0}
-.done .count{display:none}.done .today{display:block}
-h2{font-weight:900;font-size:clamp(28px,8vw,38px);line-height:1.08;letter-spacing:-.5px;margin-top:8px}
-h2 em{font-style:normal;color:var(--pink);text-shadow:0 0 22px rgba(255,79,163,.6)}
-.sub{font-size:16px;line-height:1.45;color:var(--muted);margin-top:10px}
-.sub b{color:#fff}
-.btn{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:20px;background:var(--lime);color:var(--navy);text-decoration:none;
- font-weight:900;font-size:22px;letter-spacing:-.3px;padding:20px 18px;border-radius:18px;box-shadow:0 0 34px rgba(198,244,50,.45),0 6px 0 #8fb31c;transition:transform .1s}
-.btn:active{transform:translateY(3px);box-shadow:0 0 34px rgba(198,244,50,.45),0 3px 0 #8fb31c}
-.note{font-size:14px;color:var(--muted);margin-top:16px;line-height:1.4}
-.note b{color:var(--lime)}
-.soon{display:flex;gap:14px;align-items:center;text-align:left;padding:18px}
-.soon .ic{font-size:30px}
-.soon h3{font-size:18px;font-weight:800}
-.soon p{font-size:14px;color:var(--muted);margin-top:3px}
-.pill{display:inline-block;font-size:10px;font-weight:800;letter-spacing:2px;background:var(--pink);color:var(--navy);padding:4px 9px;border-radius:99px;margin-left:6px;vertical-align:middle}
-footer{margin-top:36px;text-align:center;font-size:13px;color:#8d8aa8}
-@media (min-width:900px){
- .vinyl{width:560px;height:560px;right:-120px;top:60px}
- main{max-width:640px;padding-top:56px}
-}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
-<div class="bg" aria-hidden="true"><svg id="deco"></svg>
-<svg class="vinyl" viewBox="-200 -200 400 400" aria-hidden="true">
- <defs>
-  <radialGradient id="vg"><stop offset="0" stop-color="#0d0c1a"/><stop offset="1" stop-color="#1a1832"/></radialGradient>
-  <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="1"><stop offset=".25" stop-color="#fff" stop-opacity="0"/><stop offset=".45" stop-color="#fff" stop-opacity=".13"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/><stop offset=".75" stop-color="#ff4fa3" stop-opacity=".12"/><stop offset=".9" stop-color="#fff" stop-opacity="0"/></linearGradient>
-  <radialGradient id="lab"><stop offset="0" stop-color="#ff7cbd"/><stop offset="1" stop-color="#ff2f8f"/></radialGradient>
-  <path id="arc" d="M0 -54 A54 54 0 1 1 -0.1 -54"/>
- </defs>
- <circle r="200" fill="url(#vg)"/><g id="grooves"></g>
- <circle r="200" fill="url(#sheen)"/>
- <circle r="68" fill="url(#lab)"/>
- <circle r="62" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="1.5"/>
- <text font-family="Inter" font-weight="800" font-size="10.4" fill="#16142a"><textPath href="#arc" textLength="319" lengthAdjust="spacing">EGRESADOS 2026 ★ LA PLAYLIST DE TODOS ★ </textPath></text>
- <circle r="7" fill="#07060e"/>
-</svg></div>
+
+<div class="progress" aria-hidden="true"><i id="progress"></i></div>
+<canvas id="glitter" aria-hidden="true"></canvas>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero" id="top">
+  <video class="hero-video bg-video" id="heroVideo" muted autoplay playsinline loop preload="auto" aria-hidden="true"></video>
+  <div class="hero-shade" aria-hidden="true"></div>
+  <div class="hero-flash" aria-hidden="true"></div>
+
+  <div class="hero-inner" id="heroInner">
+    <p class="pill"><span class="pill-dot"></span>EGRESADOS 2026 · 12/12<span class="pill-dot"></span></p>
+
+    <h1 class="title">
+      <span class="t-egre foil-letters" data-split>EGRESADOS</span>
+      <span class="t-year foil-letters" id="year" data-split title="psst… tocame">2026</span>
+    </h1>
+
+    <p class="hero-tag">La noche más esperada del año.<br><b>Y la música la elegís vos.</b></p>
+
+    <div class="eq eq-hero" data-eq="28" aria-hidden="true"></div>
+
+    <a class="hero-link" href="https://is.gd/egresados2026" target="_blank" rel="noopener">🎧 Cargá tus temas <span aria-hidden="true">→</span></a>
+  </div>
+
+  <a class="scroll-hint" href="#cuenta" aria-label="Bajar a la cuenta regresiva">
+    <span class="mouse"><i></i></span>
+    <span class="scroll-txt">scroll</span>
+  </a>
+</header>
+
+<!-- ===================== CINTA ===================== -->
+<div class="ribbons" aria-hidden="true">
+  <div class="ribbon r1"><div class="track"><span>PLAYLIST ✦ EGRESADOS 2026 ✦ 12.12 ✦ FIESTA ✦ PLAYLIST ✦ EGRESADOS 2026 ✦ 12.12 ✦ FIESTA ✦&nbsp;</span><span>PLAYLIST ✦ EGRESADOS 2026 ✦ 12.12 ✦ FIESTA ✦ PLAYLIST ✦ EGRESADOS 2026 ✦ 12.12 ✦ FIESTA ✦&nbsp;</span></div></div>
+  <div class="ribbon r2"><div class="track"><span>BLACK &amp; GOLD ✦ LA NOCHE ES NUESTRA ✦ DALE PLAY ✦ BLACK &amp; GOLD ✦ LA NOCHE ES NUESTRA ✦ DALE PLAY ✦&nbsp;</span><span>BLACK &amp; GOLD ✦ LA NOCHE ES NUESTRA ✦ DALE PLAY ✦ BLACK &amp; GOLD ✦ LA NOCHE ES NUESTRA ✦ DALE PLAY ✦&nbsp;</span></div></div>
+</div>
 
 <main>
- <div class="chip"><i></i>FIESTA DE EGRESADOS · 12/12<i></i></div>
- <h1 class="big"><span class="e">EGRESADOS</span><span class="y">2026</span></h1>
- <div class="eq" id="eq" aria-hidden="true"></div>
 
- <!-- ===== Sección: cuenta regresiva ===== -->
- <section id="cuenta">
-  <div class="label">⏳ Falta para la fiesta</div>
-  <div class="cardwrap"><div class="card" id="countCard">
-   <div class="count" role="timer" aria-live="off">
-    <div><b id="d">--</b><small>días</small></div>
-    <div><b id="h">--</b><small>horas</small></div>
-    <div><b id="m">--</b><small>min</small></div>
-    <div><b id="s">--</b><small>seg</small></div>
-   </div>
-   <div class="today">¡Es hoy! 🎉</div>
-   <div class="when">Sábado <b>12 de diciembre</b> · <b id="hora">21:00</b> hs</div>
-  </div></div>
- </section>
+<!-- ===================== CUENTA REGRESIVA ===================== -->
+<section class="sec countdown-sec" id="cuenta">
+  <div class="beams" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
- <!-- ===== Sección: playlist ===== -->
- <section id="playlist">
-  <div class="label">🎶 La playlist de todos</div>
-  <h2>¿Qué tiene que <em>sonar</em> en la fiesta?</h2>
-  <p class="sub">Armamos la playlist entre todos. <b>Recomendá tus temas</b>: artista + nombre del tema.</p>
-  <a class="btn" href="https://is.gd/egresados2026" target="_blank" rel="noopener">🎧 Cargá tus temas</a>
-  <p class="note">Podés cargar temas <b>hasta el 12 de diciembre</b>, las veces que quieras.</p>
- </section>
+  <div class="wrap">
+    <p class="eyebrow reveal"><span>01</span> La cuenta</p>
+    <h2 class="sec-title reveal">Faltan<span class="dots"><i>.</i><i>.</i><i>.</i></span></h2>
 
- <!-- ===== Sección: info (próximamente) — para sumar más secciones, copiar este bloque ===== -->
- <section id="info">
-  <div class="label">📍 Info de la fiesta</div>
-  <div class="cardwrap"><div class="card soon">
-   <div class="ic">✨</div>
-   <div><h3>Lugar, horario y dress code <span class="pill">PRONTO</span></h3><p>Próximamente. ¡Estate atento!</p></div>
-  </div></div>
- </section>
+    <div class="countdown reveal reveal-scale" id="countdown" role="timer" aria-live="off" aria-label="Cuenta regresiva para la fiesta">
+      <div class="unit" data-unit="d"><div class="digits"><span class="flip"><span class="t"><i>-</i></span><span class="b"><i>-</i></span></span><span class="flip"><span class="t"><i>-</i></span><span class="b"><i>-</i></span></span></div><small>días</small></div>
+      <div class="unit" data-unit="h"><div class="digits"><span class="flip"><span class="t"><i>-</i></span><span class="b"><i>-</i></span></span><span class="flip"><span class="t"><i>-</i></span><span class="b"><i>-</i></span></span></div><small>horas</small></div>
+      <div class="unit" data-unit="m"><div class="digits"><span class="flip"><span class="t"><i>-</i></span><span class="b"><i>-</i></span></span><span class="flip"><span class="t"><i>-</i></span><span class="b"><i>-</i></span></span></div><small>min</small></div>
+      <div class="unit" data-unit="s"><div class="digits"><span class="flip"><span class="t"><i>-</i></span><span class="b"><i>-</i></span></span><span class="flip"><span class="t"><i>-</i></span><span class="b"><i>-</i></span></span></div><small>seg</small></div>
+    </div>
 
- <footer>Egresados 2026 · Hecho con 💚 para la fiesta</footer>
+    <div class="today" id="today" hidden>
+      <p class="today-txt"><span class="today-word foil-text">¡Es hoy!</span><span class="emo" aria-hidden="true">🎉</span></p>
+      <p class="today-sub">Nos vemos en la pista ✨</p>
+    </div>
+
+    <p class="when reveal"><span class="when-chip">Sábado</span> <b>12 de diciembre</b> · <b id="hora">21:00</b> hs</p>
+  </div>
+</section>
+
+<!-- ===================== PLAYLIST / CTA ===================== -->
+<section class="sec cta-sec" id="playlist">
+  <video class="cta-video bg-video" id="ctaVideo" muted playsinline loop preload="none" aria-hidden="true"></video>
+  <div class="cta-shade" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <p class="eyebrow reveal"><span>02</span> La playlist</p>
+
+    <div class="vinyl-wrap reveal reveal-scale" aria-hidden="true">
+      <svg class="vinyl" viewBox="-200 -200 400 400">
+        <defs>
+          <radialGradient id="vg"><stop offset="0" stop-color="#0c0a07"/><stop offset="1" stop-color="#16120a"/></radialGradient>
+          <linearGradient id="vsheen" x1="0" y1="0" x2="1" y2="1">
+            <stop offset=".2" stop-color="#fff6d5" stop-opacity="0"/>
+            <stop offset=".42" stop-color="#fff6d5" stop-opacity=".22"/>
+            <stop offset=".5" stop-color="#fff6d5" stop-opacity="0"/>
+            <stop offset=".72" stop-color="#d4af37" stop-opacity=".2"/>
+            <stop offset=".85" stop-color="#d4af37" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="vlab" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#fff6d5"/><stop offset=".35" stop-color="#d4af37"/><stop offset=".65" stop-color="#f7e7a1"/><stop offset="1" stop-color="#b8860b"/>
+          </linearGradient>
+          <path id="varc" d="M0 -52 A52 52 0 1 1 -0.1 -52"/>
+        </defs>
+        <circle r="200" fill="url(#vg)"/>
+        <g id="grooves" fill="none" stroke="#d4af37" stroke-opacity=".13"></g>
+        <circle r="200" fill="url(#vsheen)"/>
+        <circle r="199" fill="none" stroke="#d4af37" stroke-opacity=".5" stroke-width="2"/>
+        <circle r="70" fill="url(#vlab)"/>
+        <text font-family="Inter, sans-serif" font-weight="800" font-size="10.5" fill="#1a1205"><textPath href="#varc" textLength="320" lengthAdjust="spacing">EGRESADOS 2026 ★ LA PLAYLIST DE TODOS ★ </textPath></text>
+        <circle r="7" fill="#050505"/>
+      </svg>
+      <div class="eq eq-ring" data-eq="20"></div>
+    </div>
+
+    <h2 class="cta-title reveal">¿Qué tiene que <span class="foil-text shimmer">sonar</span> en la fiesta?</h2>
+    <p class="cta-sub reveal">La playlist la armamos entre todos. Tirá tus temas: <b>artista + nombre del tema</b>. Los que más se repitan… van seguro 🔥</p>
+
+    <div class="cta-holder reveal reveal-scale">
+      <span class="cta-halo" aria-hidden="true"></span>
+      <a class="cta" id="cta" href="https://is.gd/egresados2026" target="_blank" rel="noopener">
+        <span class="cta-icon" aria-hidden="true">🎧</span>
+        <span class="cta-label">Cargá tus temas</span>
+        <span class="cta-arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+    <p class="cta-note reveal">Podés cargar temas <b>hasta el 12 de diciembre</b>, las veces que quieras</p>
+  </div>
+</section>
+
+<div class="ribbons ribbons-2" aria-hidden="true">
+  <div class="ribbon r1"><div class="track"><span>¿QUÉ TIENE QUE SONAR? ✦ CARGÁ TUS TEMAS ✦ 12.12 ✦ ¿QUÉ TIENE QUE SONAR? ✦ CARGÁ TUS TEMAS ✦ 12.12 ✦&nbsp;</span><span>¿QUÉ TIENE QUE SONAR? ✦ CARGÁ TUS TEMAS ✦ 12.12 ✦ ¿QUÉ TIENE QUE SONAR? ✦ CARGÁ TUS TEMAS ✦ 12.12 ✦&nbsp;</span></div></div>
+</div>
+
+<!-- =====================================================================
+     INFO DE LA FIESTA
+     Para completar cuando esté confirmado, en cada tarjeta (<article>):
+       1) Sacá la clase "is-soon" del <article class="info-card is-soon">.
+       2) Reemplazá el texto de <p class="info-val">Pronto</p> por el dato.
+     Placeholders:
+       HORA ........ [ej. 21:00 a 05:00]
+       LUGAR ....... [ej. nombre del salón; ojo con publicar la dirección exacta]
+       DRESS CODE .. [ej. Black & Gold · elegante]
+     Cuando estén las 3, cambiá el texto de las dos .info-line del título
+     ("Pronto" / "más info") por algo tipo "Todo lo que" / "tenés que saber"
+     (y el aria-label del <h2>), y el párrafo .info-sub si querés.
+     Para agregar otra tarjeta: copiá un <article> completo dentro de .info-grid.
+     ===================================================================== -->
+<section class="sec info-sec" id="info">
+  <div class="wrap">
+    <p class="eyebrow reveal"><span>03</span> Info de la fiesta</p>
+    <h2 class="info-title reveal" aria-label="Pronto más info">
+      <span class="info-line foil-text shimmer">Pronto</span>
+      <span class="info-line"><span class="foil-text shimmer">más info</span><span class="sparkle" aria-hidden="true">✨</span></span>
+    </h2>
+    <p class="info-sub reveal">Hora, lugar y dress code se revelan muy pronto. Estate atento 👀</p>
+
+    <div class="info-grid">
+      <article class="info-card is-soon reveal">
+        <span class="info-ic" aria-hidden="true">🕘</span>
+        <h3>Hora</h3>
+        <p class="info-val">Pronto</p>
+      </article>
+      <article class="info-card is-soon reveal">
+        <span class="info-ic" aria-hidden="true">📍</span>
+        <h3>Lugar</h3>
+        <p class="info-val">Pronto</p>
+      </article>
+      <article class="info-card is-soon reveal">
+        <span class="info-ic" aria-hidden="true">🖤</span>
+        <h3>Dress code</h3>
+        <p class="info-val">Pronto</p>
+      </article>
+    </div>
+  </div>
+</section>
+
 </main>
 
-<script>
-// ===== Fecha y hora de la fiesta (hora Argentina, UTC-3). Cambiar acá. =====
-const FIESTA = '2026-12-12T21:00:00-03:00';
+<footer class="foot">
+  <div class="eq eq-foot" data-eq="40" aria-hidden="true"></div>
+  <p class="foot-brand foil-text">EGRESADOS 2026</p>
+  <p class="foot-small">12 · 12 · Hecho con 🖤 y 💛 para la fiesta</p>
+  <p class="foot-egg">psst… tocá el <b>2026</b> cinco veces 🤫</p>
+</footer>
 
-const target = new Date(FIESTA).getTime();
-document.getElementById('hora').textContent =
-  new Date(FIESTA).toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'America/Buenos_Aires'});
-const pad = n => String(n).padStart(2,'0');
-function tick(){
-  let diff = Math.max(0, target - Date.now());
-  if (diff === 0){ document.getElementById('countCard').classList.add('done'); return; }
-  const s = Math.floor(diff/1000);
-  document.getElementById('d').textContent = Math.floor(s/86400);
-  document.getElementById('h').textContent = pad(Math.floor(s%86400/3600));
-  document.getElementById('m').textContent = pad(Math.floor(s%3600/60));
-  document.getElementById('s').textContent = pad(s%60);
-  setTimeout(tick, 1000 - (Date.now()%1000));
-}
-tick();
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-// ===== Decoración: surcos del vinilo, onda de sonido, confetti =====
-let g='';for(let r=190;r>72;r-=6)g+=`<circle r="${r}" fill="none" stroke="${r%3?'#2b2850':'#36325f'}" stroke-width="1.3"/>`;
-document.getElementById('grooves').innerHTML=g;
-let b='';const N=40;for(let i=0;i<N;i++){const t=i/(N-1);const h=.18+.82*Math.abs(Math.sin(i*.55)*Math.cos(i*.21))*(.55+.45*Math.sin(t*Math.PI));
- b+=`<span style="height:${(h*100).toFixed(0)}%;animation-delay:${(-(i*0.37)%1.2).toFixed(2)}s"></span>`;}
-document.getElementById('eq').innerHTML=b;
-function deco(){
-  const el=document.getElementById('deco');const W=document.documentElement.clientWidth,H=document.body.scrollHeight;
-  el.setAttribute('viewBox',`0 0 ${W} ${H}`);
-  let seed=7;const R=()=>(seed=seed*16807%2147483647)/2147483647;
-  const cols=['#c6f432','#ff4fa3','#8b6cff','#ffffff'];let o='';
-  const n=Math.round(W*H/9000);
-  for(let i=0;i<n;i++){const x=R()*W,y=R()*H,c=cols[Math.floor(R()*4)],rot=R()*180,w=6+R()*9,h=3+R()*4;
-    o+=`<rect x="${x|0}" y="${y|0}" width="${w|0}" height="${h|0}" rx="2" fill="${c}" opacity="${(.25+R()*.4).toFixed(2)}" transform="rotate(${rot|0} ${x|0} ${y|0})"/>`;}
-  for(let i=0;i<n/3;i++){const x=R()*W,y=R()*H,s=4+R()*9,c=R()>.5?'#fff':'#c6f432';
-    o+=`<path d="M${x} ${y-s} Q${x} ${y} ${x+s} ${y} Q${x} ${y} ${x} ${y+s} Q${x} ${y} ${x-s} ${y} Q${x} ${y} ${x} ${y-s}Z" fill="${c}" opacity="${(.4+R()*.5).toFixed(2)}"/>`;}
-  el.innerHTML=o;
-}
-deco();addEventListener('resize',deco);document.fonts&&document.fonts.ready.then(deco);
-</script>
+<script src="app.js" defer></script>
 </body>
 </html>
