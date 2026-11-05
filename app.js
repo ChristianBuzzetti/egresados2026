@@ -1,6 +1,7 @@
 /* EGRESADOS 2026 · black & gold — vanilla JS, sin dependencias */
 (() => {
   'use strict';
+  window.EG_OK = true;
 
   // ===== Fecha y hora de la fiesta (hora Argentina, UTC-3). Cambiar acá. =====
   const FIESTA = '2026-12-12T21:00:00-03:00';
@@ -22,7 +23,9 @@
   /* ---------------------------------------------------------------
      Texto letra por letra
   --------------------------------------------------------------- */
+  // el título ya viene partido en el HTML (se ve sin esperar al JS); esto es respaldo
   $$('[data-split]').forEach(el => {
+    if (el.querySelector('.ch')) return;
     const txt = el.textContent.trim();
     el.setAttribute('aria-label', txt);
     el.textContent = '';
@@ -40,6 +43,7 @@
      Ecualizadores
   --------------------------------------------------------------- */
   $$('[data-eq]').forEach(el => {
+    if (el.children.length) return;   // el del hero ya viene en el HTML
     const n = +el.dataset.eq;   // en modo liviano el CSS oculta una de cada dos
     let html = '';
     for (let i = 0; i < n; i++) {
@@ -118,13 +122,13 @@
   }
 
   function setVideo(v, kind, play) {
-    v.poster = `media/poster_${kind}.jpg`;
+    v.poster = `media/poster_${kind}.webp?v=4`;
     inlineMuted(v);
     if (RM) { v.removeAttribute('autoplay'); v.autoplay = false; v.preload = 'none'; return; } // solo poster
     v.autoplay = true; v.setAttribute('autoplay', ''); v.loop = true;
     for (const [ext, type] of ORDER) {
       const s = document.createElement('source');
-      s.src = `media/hero_${kind}.${ext}?v=3`;
+      s.src = `media/hero_${kind}.${ext}?v=4`;
       s.type = type;
       v.appendChild(s);
     }
@@ -137,7 +141,13 @@
   }
 
   const heroVideo = $('#heroVideo');
-  if (!LITE) setVideo(heroVideo, heroKind, true);
+  // el video del hero arranca recién cuando terminó de cargar el primer pantallazo
+  // (no compite con fuentes ni poster; mientras tanto se ve el poster)
+  const startHero = () => { if (!LITE && !heroVideo._src) setVideo(heroVideo, heroKind, true); };
+  if (!LITE) {
+    if (document.readyState === 'complete') setTimeout(startHero, 0);
+    else addEventListener('load', () => setTimeout(startHero, 0), { once: true });
+  }
 
   // libera un video (modo liviano): deja de descargar y decodificar
   function dropVideo(v) {
@@ -203,7 +213,7 @@
       if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
     }), { threshold: 0.15, rootMargin: '0px 0px -5% 0px' });
     $$('.reveal').forEach((el, i) => {
-      el.style.transitionDelay = (el.parentElement.classList.contains('info-grid') ? (i % 3) * 0.12 : 0) + 's';
+      el.style.transitionDelay = (el.parentElement.classList.contains('info-grid') ? (i % 3) * 0.08 : 0) + 's';
       io.observe(el);
     });
   } else {
@@ -559,6 +569,18 @@
     upd();
   })();
   tick();
+
+  /* Syne (solo el título de la playlist, abajo de todo): se baja después del load
+     para no competir con el primer pantallazo; hasta entonces se ve con Inter 800 */
+  const loadSyne = () => {
+    if (!('FontFace' in window)) return;
+    const f = new FontFace('Syne', 'url(fonts/syne-latin-800.woff2?v=4) format("woff2")', {
+      weight: '800', style: 'normal', display: 'swap',
+      unicodeRange: 'U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD'
+    });
+    f.load().then(ff => document.fonts.add(ff)).catch(() => {});
+  };
+  if (document.readyState === 'complete') loadSyne(); else addEventListener('load', loadSyne, { once: true });
 
   /* ---------------------------------------------------------------
      Modo liviano automático: muestreo de FPS ~2 s al cargar
