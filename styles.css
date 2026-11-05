@@ -273,7 +273,7 @@ main{position:relative;z-index:4}
 .info-card::before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,246,213,.14) 50%,transparent 70%);transform:translateX(-100%);animation:cardShine 4s ease-in-out infinite}
 .info-card:nth-child(2)::before{animation-delay:.6s}.info-card:nth-child(3)::before{animation-delay:1.2s}
 @keyframes cardShine{0%{transform:translateX(-100%)}50%,100%{transform:translateX(100%)}}
-.info-ic{grid-row:span 2;font-size:34px;width:62px;height:62px;display:grid;place-items:center;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,.25),rgba(212,175,55,.04));border:1px solid rgba(212,175,55,.4)}
+.info-ic{grid-row:1 / span 4;font-size:34px;width:62px;height:62px;display:grid;place-items:center;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,.25),rgba(212,175,55,.04));border:1px solid rgba(212,175,55,.4)}
 @media (min-width:720px){.info-ic{grid-row:auto;margin-bottom:8px}}
 .info-card h3{font-weight:800;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--g-lt)}
 .info-val{font-family:var(--display);font-size:30px;line-height:1.15;color:var(--cream);margin-top:2px}
@@ -313,3 +313,14 @@ main{position:relative;z-index:4}
   .info-card::before{display:none}
 }
 .nowrap{white-space:nowrap}
+
+/* info confirmada */
+@media (min-width:720px){.info-grid-2{grid-template-columns:repeat(2,minmax(0,1fr))!important;max-width:820px;margin-left:auto;margin-right:auto}}
+.info-card .info-val{font-size:26px}
+.info-extra{grid-column:2;color:var(--g-lt);font-size:15px;margin-top:4px;opacity:.9}
+.info-map{grid-column:2;justify-self:start;margin-top:12px;display:inline-flex;gap:6px;align-items:center;padding:9px 16px;border-radius:999px;border:1px solid rgba(232,200,120,.55);color:var(--cream);text-decoration:none;font-weight:700;font-size:14px;letter-spacing:.02em;background:rgba(232,200,120,.08);position:relative;z-index:1;transition:background .2s,transform .2s}
+.info-map:hover,.info-map:focus-visible{background:rgba(232,200,120,.2);transform:translateY(-1px)}
+@media (min-width:720px){.info-extra,.info-map{grid-column:1;justify-self:center}}
+.cta-left{margin-top:8px;font-size:14px;color:var(--g-lt);opacity:.85}
+.cta.is-closed{pointer-events:none;filter:grayscale(.6);opacity:.7}
+@media (min-width:720px){.info-grid-2 .info-ic{grid-row:auto}.info-grid-2 .info-card{align-content:center}}

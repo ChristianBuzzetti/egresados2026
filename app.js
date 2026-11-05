@@ -507,5 +507,25 @@
       }, { threshold: 0.4 }).observe($('#today'));
     }
   }
+
+  // ===== Cierre de la lista de temas: viernes 11/12/2026 23:59 (AR) =====
+  (function () {
+    const CIERRE = new Date('2026-12-11T23:59:00-03:00').getTime();
+    const cta = document.getElementById('cta'), left = document.getElementById('cta-left'), note = document.getElementById('cta-note');
+    if (!cta || !left) return;
+    function upd() {
+      const d = CIERRE - Date.now();
+      if (d <= 0) {
+        cta.classList.add('is-closed'); cta.removeAttribute('href'); cta.setAttribute('aria-disabled', 'true');
+        const l = cta.querySelector('.cta-label'); if (l) l.textContent = 'Lista cerrada';
+        if (note) note.innerHTML = 'La lista de temas cerró el <b>viernes 11/12 a las 23:59</b>. ¡Nos vemos en la fiesta!';
+        left.textContent = ''; return;
+      }
+      const m = Math.floor(d / 60000), dd = Math.floor(m / 1440), hh = Math.floor((m % 1440) / 60), mm = m % 60;
+      left.textContent = '⏳ Cierra en ' + (dd ? dd + (dd === 1 ? ' día, ' : ' días, ') : '') + hh + ' h ' + mm + ' min';
+      setTimeout(upd, 30000);
+    }
+    upd();
+  })();
   tick();
 })();
