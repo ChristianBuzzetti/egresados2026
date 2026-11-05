@@ -226,16 +226,17 @@ main{position:relative;z-index:4}
 
 .cta-holder{position:relative;display:inline-block;margin-top:40px;width:min(100%,520px)}
 .cta-halo{position:absolute;inset:-14px;border-radius:999px;z-index:0;pointer-events:none;
-  background:conic-gradient(from var(--a,0deg),transparent 0 15%,rgba(255,246,213,.95) 25%,rgba(212,175,55,.9) 32%,transparent 45% 65%,rgba(247,231,161,.9) 75%,transparent 88%);
-  filter:blur(14px);opacity:.85;animation:halo 3s linear infinite}
-@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
-@keyframes halo{to{--a:360deg}}
+  overflow:hidden;filter:blur(14px);opacity:.85;transform:translateZ(0)}
+.cta-halo::before{content:"";position:absolute;left:50%;top:50%;width:120%;height:0;padding-top:120%;margin:-60% 0 0 -60%;will-change:transform;
+  background:conic-gradient(from 0deg,transparent 0 15%,rgba(255,246,213,.95) 25%,rgba(212,175,55,.9) 32%,transparent 45% 65%,rgba(247,231,161,.9) 75%,transparent 88%);
+  animation:halo 3s linear infinite}
+@keyframes halo{to{transform:rotate(360deg)}}
 .cta{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:12px;width:100%;padding:24px 22px;border-radius:999px;text-decoration:none;overflow:hidden;
   font-family:Inter,system-ui,sans-serif;font-weight:800;font-size:clamp(21px,5.8vw,30px);letter-spacing:-.02em;white-space:nowrap;color:#140e02;
   background:linear-gradient(180deg,#fff6d5 0%,#f7e7a1 18%,#d4af37 50%,#b8860b 78%,#e9cf7a 100%);
   box-shadow:inset 0 2px 0 rgba(255,255,255,.75),inset 0 -4px 0 rgba(110,79,14,.6),0 0 0 2px #7a5a12,0 0 0 4px rgba(247,231,161,.35),0 16px 40px rgba(0,0,0,.7),0 0 60px rgba(212,175,55,.45);
   animation:ctaPulse 2.2s ease-in-out infinite;transition:transform .2s}
-.cta::before{content:"";position:absolute;top:-50%;bottom:-50%;width:38%;left:-60%;transform:skewX(-22deg);
+.cta::before{content:"";position:absolute;top:-50%;bottom:-50%;width:38%;left:-60%;transform:skewX(-22deg);will-change:transform;
   background:linear-gradient(90deg,transparent,rgba(255,255,255,.95),transparent);animation:sweepFoil 2.6s ease-in-out infinite}
 .cta::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
   background:repeating-linear-gradient(115deg,rgba(255,255,255,0) 0 6px,rgba(255,255,255,.08) 6px 7px);mix-blend-mode:overlay}
@@ -246,7 +247,7 @@ main{position:relative;z-index:4}
 .cta:hover{transform:translateY(-3px) scale(1.03)}
 .cta:active{transform:translateY(2px) scale(.98)}
 .cta:focus-visible{outline:3px solid var(--g-hi);outline-offset:6px}
-@keyframes sweepFoil{0%{left:-60%}55%,100%{left:130%}}
+@keyframes sweepFoil{0%{transform:translateX(0) skewX(-22deg)}55%,100%{transform:translateX(500%) skewX(-22deg)}}
 @keyframes ctaPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
 @keyframes nudge{50%{transform:translateX(6px)}}
 .cta-note{margin-top:22px;font-size:15px;line-height:1.5;color:var(--muted)}
@@ -324,3 +325,67 @@ main{position:relative;z-index:4}
 .cta-left{margin-top:8px;font-size:14px;color:var(--g-lt);opacity:.85}
 .cta.is-closed{pointer-events:none;filter:grayscale(.6);opacity:.7}
 @media (min-width:720px){.info-grid-2 .info-ic{grid-row:auto}.info-grid-2 .info-card{align-content:center}}
+
+/* ==========================================================
+   RENDIMIENTO
+   ========================================================== */
+/* animaciones pausadas cuando la sección no está en pantalla */
+.off *,.off *::before,.off *::after{animation-play-state:paused!important}
+/* fondo animado barato del modo liviano (oculto en modo completo) */
+.kb{display:none}
+
+/* ==========================================================
+   MODO LIVIANO (celulares modestos, ahorro de datos, reduced motion)
+   misma estética, solo transform/opacity, sin blur ni blend
+   ========================================================== */
+.lite .bg-video{display:none!important}
+.lite .kb{display:block;position:absolute;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.lite .kb>i{position:absolute;inset:-4%;background:url(media/poster_vertical.jpg) center/cover no-repeat;
+  animation:kb 16s ease-in-out infinite alternate;will-change:transform}
+@media (orientation:landscape) and (min-width:760px){.lite .kb-hero>i{background-image:url(media/poster_wide.jpg)}.lite .kb-cta>i{background-image:url(media/poster_vertical.jpg)}}
+.lite .kb-cta>i{background-image:url(media/poster_wide.jpg);opacity:.4}
+.lite .kb::after{content:"";position:absolute;top:-20%;bottom:-20%;left:0;width:45%;
+  background:linear-gradient(100deg,transparent,rgba(255,246,213,.16) 45%,rgba(212,175,55,.1) 55%,transparent);
+  transform:translateX(-120%) skewX(-12deg);animation:glint 7s ease-in-out infinite;will-change:transform}
+@keyframes kb{from{transform:scale(1) translate3d(0,0,0)}to{transform:scale(1.09) translate3d(-1.5%,-1%,0)}}
+@keyframes glint{0%,35%{transform:translateX(-120%) skewX(-12deg)}75%,100%{transform:translateX(330%) skewX(-12deg)}}
+
+.lite #glitter,.lite .cursor-glow{display:none!important}
+.lite .hero-video,.lite .hero-inner{will-change:auto}
+.lite .pill,.lite .hero-link{-webkit-backdrop-filter:none;backdrop-filter:none}
+.lite .pill{background:rgba(10,8,4,.82);box-shadow:0 0 0 4px rgba(212,175,55,.08),0 0 18px rgba(212,175,55,.22)}
+.lite .hero-link{background:rgba(5,5,5,.78)}
+.lite .progress i{box-shadow:none}
+
+/* dorado foil fijo (sin repintar el degradé cada frame) */
+.lite .shimmer,.lite .sec-title,.lite .foot-brand,.lite .ribbon.r1,.lite .today-word,.lite .is-soon .info-val{animation:none}
+.lite .foil-letters .ch{background-position:calc(var(--i) * -18%) 50%}
+.js.lite .foil-letters .ch{animation:letterInLite .7s calc(.3s + var(--i) * .06s) cubic-bezier(.2,1.3,.3,1) both}
+.js.lite .t-year .ch{animation-delay:calc(.8s + var(--i) * .1s)}
+.js.lite .t-year.boom{animation:boom .45s cubic-bezier(.2,1.6,.4,1)}
+.js.lite .t-year.tap{animation:tapb .18s ease-out}
+@keyframes letterInLite{from{opacity:0;transform:translateY(.4em) scale(.7)}to{opacity:1;transform:none}}
+.lite .shimmer,.lite .sec-title{background-position:30% 50%}
+.lite .title{filter:drop-shadow(0 4px 0 rgba(40,28,4,.9))}
+.lite .sec-title,.lite .cta-title .foil-text,.lite .today-txt{filter:none}
+
+/* haces de luz: 2 en vez de 4, sin blur ni blend */
+.lite .beams{mix-blend-mode:normal}
+.lite .beams i{filter:none;opacity:.28;background:linear-gradient(180deg,rgba(255,246,213,.3),rgba(212,175,55,.08) 45%,transparent 80%)}
+.lite .beams i:nth-child(2),.lite .beams i:nth-child(3){display:none}
+
+/* ecualizadores: la mitad de barras y sin sombra */
+.lite .eq i{box-shadow:none}
+.lite .eq i:nth-child(2n){display:none}
+
+/* vinilo: gira igual, el brillo queda fijo detrás */
+.lite .vinyl{filter:none}
+.lite .vinyl-wrap::before{content:"";position:absolute;inset:-12%;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,.32),rgba(212,175,55,.08) 50%,transparent 70%)}
+
+/* CTA: halo con glow fijo que late en opacidad, sin blur animado */
+.lite .cta-halo{filter:none;overflow:visible;background:none;inset:-6px;box-shadow:0 0 28px 6px rgba(212,175,55,.55),0 0 0 2px rgba(247,231,161,.35);animation:haloLite 2.2s ease-in-out infinite}
+.lite .cta-halo::before{display:none}
+@keyframes haloLite{50%{opacity:.45}}
+.lite .cta{box-shadow:inset 0 2px 0 rgba(255,255,255,.75),inset 0 -4px 0 rgba(110,79,14,.6),0 0 0 2px #7a5a12,0 12px 28px rgba(0,0,0,.7)}
+.lite .cta::after{mix-blend-mode:normal;opacity:.6}
+.lite .ribbon.r1{box-shadow:0 10px 30px rgba(0,0,0,.6)}

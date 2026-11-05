@@ -12,6 +12,10 @@
   const FINE = matchMedia('(pointer: fine)').matches;
   const SMALL = innerWidth < 760;
   const root = document.documentElement;
+  // modo liviano: lo decide el <head> (núcleos, memoria, ahorro de datos, reduced motion)
+  // y, si no, un muestreo de FPS de 2 s al cargar (más abajo)
+  let LITE = root.classList.contains('lite');
+  const FORCED = /-fijo$/.test(root.getAttribute('data-mode') || '');
   const GOLDS = ['#fff6d5', '#f7e7a1', '#d4af37', '#b8860b', '#e9cf7a', '#ffffff'];
   const rand = (a, b) => a + Math.random() * (b - a);
 
@@ -36,7 +40,7 @@
      Ecualizadores
   --------------------------------------------------------------- */
   $$('[data-eq]').forEach(el => {
-    const n = +el.dataset.eq;
+    const n = +el.dataset.eq;   // en modo liviano el CSS oculta una de cada dos
     let html = '';
     for (let i = 0; i < n; i++) {
       const t = i / Math.max(1, n - 1);
@@ -120,7 +124,7 @@
     v.autoplay = true; v.setAttribute('autoplay', ''); v.loop = true;
     for (const [ext, type] of ORDER) {
       const s = document.createElement('source');
-      s.src = `media/hero_${kind}.${ext}`;
+      s.src = `media/hero_${kind}.${ext}?v=3`;
       s.type = type;
       v.appendChild(s);
     }
@@ -133,7 +137,19 @@
   }
 
   const heroVideo = $('#heroVideo');
-  setVideo(heroVideo, heroKind, true);
+  if (!LITE) setVideo(heroVideo, heroKind, true);
+
+  // libera un video (modo liviano): deja de descargar y decodificar
+  function dropVideo(v) {
+    if (!v) return;
+    try { v.pause(); } catch (_) {}
+    v._src = false;
+    v.removeAttribute('autoplay'); v.autoplay = false;
+    $$('source', v).forEach(s => s.remove());
+    v.removeAttribute('src');
+    v.classList.remove('ready', 'fading');
+    try { v.load(); } catch (_) {}
+  }
 
   // iOS en modo ahorro bloquea el autoplay: reintentar con el primer toque
   if (!RM) {
@@ -151,6 +167,7 @@
     new IntersectionObserver(([e]) => {
       if (e.isIntersecting && !loaded) {
         loaded = true;
+        if (LITE) return;
         setVideo(ctaVideo, ctaKind, true);
         if (RM) ctaVideo.classList.add('ready'); // muestra el poster
       }
@@ -168,6 +185,14 @@
       vis.observe($('.hero'));
       vis.observe(ctaSec);
     }
+  }
+
+  /* Pausar animaciones CSS de las secciones que no están en pantalla */
+  if ('IntersectionObserver' in window) {
+    const offIO = new IntersectionObserver(entries => entries.forEach(e => {
+      e.target.classList.toggle('off', !e.isIntersecting);
+    }), { rootMargin: '120px 0px' });
+    $$('[data-anim]').forEach(el => offIO.observe(el));
   }
 
   /* ---------------------------------------------------------------
@@ -198,6 +223,7 @@
     progress.style.transform = `scaleX(${max > 0 ? Math.min(1, y / max) : 0})`;
     if (RM || y > h * 1.2) return;
     const k = y / h;
+    if (LITE) { heroInner.style.transform = ''; heroInner.style.opacity = Math.max(0, 1 - k * 1.3); return; }
     heroInner.style.transform = `translate3d(0,${y * 0.35}px,0) scale(${1 - k * 0.08})`;
     heroInner.style.opacity = Math.max(0, 1 - k * 1.3);
     heroVideo.style.transform = `scale(${1 + k * 0.18})`;
@@ -210,7 +236,8 @@
   --------------------------------------------------------------- */
   const fx = $('#fx');
   const fctx = fx.getContext('2d');
-  const DPR = Math.min(devicePixelRatio || 1, 2);
+  let DPR = Math.min(devicePixelRatio || 1, LITE ? 1 : 2);
+  const Q = () => (LITE ? 0.5 : 1);   // cantidad de partículas según el modo
   let FW = 0, FH = 0;
   const parts = [];
   let fxRunning = false;
@@ -234,11 +261,13 @@
   }
   function burst(x, y, n = 26, power = 1) {
     if (RM) return;
+    n = Math.round(n * Q());
     for (let i = 0; i < n; i++) spark(x, y, power);
     startFx();
   }
   function confettiBlast(x, y, n = 120) {
     if (RM) return;
+    n = Math.round(n * Q());
     for (let i = 0; i < n; i++) {
       const a = rand(-Math.PI * 0.95, -Math.PI * 0.05), sp = rand(6, 17);
       confetto(x, y, Math.cos(a) * sp, Math.sin(a) * sp);
@@ -248,6 +277,7 @@
   // cañón desde un borde: dispara en abanico hacia arriba/adentro (no explota sobre el texto)
   function confettiCannon(x, y, dir, n = 80) {
     if (RM) return;
+    n = Math.round(n * Q());
     for (let i = 0; i < n; i++) {
       const a = -Math.PI / 2 + dir * rand(0.15, 0.6), sp = rand(13, 22);
       confetto(x, y, Math.cos(a) * sp, Math.sin(a) * sp);
@@ -265,8 +295,8 @@
   }
   function fxLoop(now) {
     fctx.clearRect(0, 0, FW, FH);
-    if (now < rainUntil && parts.length < 400) {
-      for (let i = 0; i < (SMALL ? 3 : 5); i++) confetto(rand(0, FW), -20, rand(-1, 1), rand(1, 4));
+    if (now < rainUntil && parts.length < (LITE ? 160 : 400)) {
+      for (let i = 0; i < (LITE ? 2 : SMALL ? 3 : 5); i++) confetto(rand(0, FW), -20, rand(-1, 1), rand(1, 4));
     }
     fctx.globalCompositeOperation = 'lighter';
     for (let i = parts.length - 1; i >= 0; i--) {
@@ -321,7 +351,7 @@
   }
   let lastScroll = scrollY;
   function glLoop() {
-    if (document.hidden) { glRunning = false; return; }
+    if (document.hidden || LITE) { glRunning = false; gctx.clearRect(0, 0, GW, GH); return; }
     gctx.clearRect(0, 0, GW, GH);
     const dy = (scrollY - lastScroll) * 0.25; lastScroll = scrollY;
     for (const p of glitter) {
@@ -342,14 +372,14 @@
     gctx.globalAlpha = 1;
     requestAnimationFrame(glLoop);
   }
-  function startGl() { if (!RM && !glRunning && !document.hidden) { glRunning = true; requestAnimationFrame(glLoop); } }
-  if (!RM) { sizeGl(); makeGlitter(); startGl(); }
+  function startGl() { if (!RM && !LITE && !glRunning && !document.hidden) { glRunning = true; requestAnimationFrame(glLoop); } }
+  if (!RM && !LITE) { sizeGl(); makeGlitter(); startGl(); }
   document.addEventListener('visibilitychange', () => { if (!document.hidden) startGl(); });
 
   let rz;
   addEventListener('resize', () => {
     clearTimeout(rz);
-    rz = setTimeout(() => { sizeFx(); if (!RM) { sizeGl(); makeGlitter(); } }, 150);
+    rz = setTimeout(() => { sizeFx(); if (!RM && !LITE) { sizeGl(); makeGlitter(); } }, 150);
   });
 
   /* ---------------------------------------------------------------
@@ -360,6 +390,7 @@
     if (FINE) {
       let gx = 0, gy = 0, lastSpark = 0;
       addEventListener('pointermove', e => {
+        if (LITE) return;
         gx = e.clientX; gy = e.clientY;
         glow.style.transform = `translate3d(${gx}px,${gy}px,0)`;
         glow.classList.add('on');
@@ -528,4 +559,46 @@
     upd();
   })();
   tick();
+
+  /* ---------------------------------------------------------------
+     Modo liviano automático: muestreo de FPS ~2 s al cargar
+  --------------------------------------------------------------- */
+  function goLite(why) {
+    if (LITE) return;
+    LITE = true;
+    root.classList.add('lite');
+    root.setAttribute('data-mode', 'lite');
+    root.setAttribute('data-lite-why', why);
+    try { sessionStorage.setItem('eg-mode-auto', 'lite'); } catch (_) {}
+    dropVideo(heroVideo); dropVideo(ctaVideo);
+    heroVideo.style.transform = '';
+    DPR = 1; sizeFx();
+    onScroll();
+  }
+  let autoLite = false;
+  try { autoLite = sessionStorage.getItem('eg-mode-auto') === 'lite'; } catch (_) {}
+  if (!LITE && !FORCED) {
+    if (autoLite) goLite('sesion');
+    else {
+      const sample = () => {
+        if (document.hidden) { document.addEventListener('visibilitychange', sample, { once: true }); return; }
+        let n = 0, t0 = 0, hid = false;
+        const onHide = () => { hid = true; };
+        document.addEventListener('visibilitychange', onHide, { once: true });
+        const f = t => {
+          if (!t0) t0 = t;
+          n++;
+          if (t - t0 < 2000) return requestAnimationFrame(f);
+          document.removeEventListener('visibilitychange', onHide);
+          if (hid) return;
+          const fps = (n - 1) * 1000 / (t - t0);
+          root.setAttribute('data-fps', fps.toFixed(1));
+          if (fps < 45) goLite('fps ' + fps.toFixed(0));
+        };
+        requestAnimationFrame(f);
+      };
+      const start = () => setTimeout(sample, 300);
+      if (document.readyState === 'complete') start(); else addEventListener('load', start, { once: true });
+    }
+  }
 })();

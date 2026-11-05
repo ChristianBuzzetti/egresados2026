@@ -23,8 +23,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-<script>document.documentElement.classList.add('js')</script>
+<link rel="stylesheet" href="styles.css?v=3">
+<script>
+/* Modo liviano: se decide antes de pintar. ?lite fuerza liviano, ?full fuerza completo. */
+(function(){var d=document.documentElement,n=navigator,l=false,f='';d.classList.add('js');
+try{var q=location.search,ss=window.sessionStorage,c=n.connection||{};
+if(/[?&]full\b/.test(q)){f='full';ss.setItem('eg-mode','full')}else if(/[?&]lite\b/.test(q)){f='lite';ss.setItem('eg-mode','lite')}else{f=ss.getItem('eg-mode')||''}
+if(f)l=f==='lite';else l=!!((n.hardwareConcurrency&&n.hardwareConcurrency<=6)||(n.deviceMemory&&n.deviceMemory<=4)||c.saveData||matchMedia('(prefers-reduced-motion: reduce)').matches)}catch(e){}
+if(l)d.classList.add('lite');d.setAttribute('data-mode',f?f+'-fijo':(l?'lite':'auto'))})();
+</script>
 </head>
 <body>
 
@@ -34,8 +41,9 @@
 <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
 <!-- ===================== HERO ===================== -->
-<header class="hero" id="top">
-  <video class="hero-video bg-video" id="heroVideo" muted autoplay playsinline loop preload="auto" aria-hidden="true"></video>
+<header class="hero" id="top" data-anim>
+  <div class="kb kb-hero" aria-hidden="true"><i></i></div>
+  <video class="hero-video bg-video" id="heroVideo" muted playsinline loop preload="metadata" aria-hidden="true"></video>
   <div class="hero-shade" aria-hidden="true"></div>
   <div class="hero-flash" aria-hidden="true"></div>
 
@@ -61,7 +69,7 @@
 </header>
 
 <!-- ===================== CINTA ===================== -->
-<div class="ribbons" aria-hidden="true">
+<div class="ribbons" aria-hidden="true" data-anim>
   <div class="ribbon r1"><div class="track"><span>PLAYLIST ✦ EGRESADOS 2026 ✦ 12.12 ✦ FIESTA ✦ PLAYLIST ✦ EGRESADOS 2026 ✦ 12.12 ✦ FIESTA ✦&nbsp;</span><span>PLAYLIST ✦ EGRESADOS 2026 ✦ 12.12 ✦ FIESTA ✦ PLAYLIST ✦ EGRESADOS 2026 ✦ 12.12 ✦ FIESTA ✦&nbsp;</span></div></div>
   <div class="ribbon r2"><div class="track"><span>BLACK &amp; GOLD ✦ LA NOCHE ES NUESTRA ✦ DALE PLAY ✦ BLACK &amp; GOLD ✦ LA NOCHE ES NUESTRA ✦ DALE PLAY ✦&nbsp;</span><span>BLACK &amp; GOLD ✦ LA NOCHE ES NUESTRA ✦ DALE PLAY ✦ BLACK &amp; GOLD ✦ LA NOCHE ES NUESTRA ✦ DALE PLAY ✦&nbsp;</span></div></div>
 </div>
@@ -69,7 +77,7 @@
 <main>
 
 <!-- ===================== CUENTA REGRESIVA ===================== -->
-<section class="sec countdown-sec" id="cuenta">
+<section class="sec countdown-sec" id="cuenta" data-anim>
   <div class="beams" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
   <div class="wrap">
@@ -93,7 +101,8 @@
 </section>
 
 <!-- ===================== PLAYLIST / CTA ===================== -->
-<section class="sec cta-sec" id="playlist">
+<section class="sec cta-sec" id="playlist" data-anim>
+  <div class="kb kb-cta" aria-hidden="true"><i></i></div>
   <video class="cta-video bg-video" id="ctaVideo" muted playsinline loop preload="none" aria-hidden="true"></video>
   <div class="cta-shade" aria-hidden="true"></div>
 
@@ -143,12 +152,12 @@
   </div>
 </section>
 
-<div class="ribbons ribbons-2" aria-hidden="true">
+<div class="ribbons ribbons-2" aria-hidden="true" data-anim>
   <div class="ribbon r1"><div class="track"><span>¿QUÉ TIENE QUE SONAR? ✦ CARGÁ TUS TEMAS ✦ 12.12 ✦ ¿QUÉ TIENE QUE SONAR? ✦ CARGÁ TUS TEMAS ✦ 12.12 ✦&nbsp;</span><span>¿QUÉ TIENE QUE SONAR? ✦ CARGÁ TUS TEMAS ✦ 12.12 ✦ ¿QUÉ TIENE QUE SONAR? ✦ CARGÁ TUS TEMAS ✦ 12.12 ✦&nbsp;</span></div></div>
 </div>
 
 <!-- INFO DE LA FIESTA: hora y lugar confirmados -->
-<section class="sec info-sec" id="info">
+<section class="sec info-sec" id="info" data-anim>
   <div class="wrap">
     <p class="eyebrow reveal"><span>03</span> Dónde y cuándo</p>
     <h2 class="info-title reveal" aria-label="La previa: dónde y cuándo">
@@ -177,7 +186,7 @@
 
 </main>
 
-<footer class="foot">
+<footer class="foot" data-anim>
   <div class="eq eq-foot" data-eq="40" aria-hidden="true"></div>
   <p class="foot-brand foil-text">EGRESADOS 2026</p>
   <p class="foot-small">12 · 12 · Hecho con 🖤 y 💛 para la fiesta</p>
@@ -186,6 +195,6 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="app.js" defer></script>
+<script src="app.js?v=3" defer></script>
 </body>
 </html>
